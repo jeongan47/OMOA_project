@@ -6,7 +6,7 @@ from user.models import User
 
 
 # Create your views here.
-def login(request):
+def login_view(request):
     # 이미 로그인되어 있다면
     if request.user.is_authenticated:
         return redirect("post:choice")
@@ -44,7 +44,7 @@ def login(request):
     }
     return render(request, "user/login.html", context)
 
-def logout(request):
+def logout_view(request):
     # logout 함수 호출에 request를 전달
     logout(request)
 
