@@ -9,7 +9,7 @@ def ott_choice(request):
     return render(request,"post/ott_choice.html")
 
 def netflix(request):
-    netflix = Post.objects.filter(content_ott = "netflix")
+    netflix = Post.objects.filter(content_ott = "Netflix")
     context = {
         "netflix": netflix
     }
