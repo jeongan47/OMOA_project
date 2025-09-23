@@ -3,10 +3,45 @@ from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class User(AbstractUser):
-    profile_image = models.ImageField("프로필 이미지", upload_to="user/profile", blank=True)
+    profile_image = models.ImageField("프로필 이미지", 
+                                      upload_to="user/profile", 
+                                      blank=True)
     short_description = models.TextField("소개글", blank=True)
     
+    like_posts = models.ManyToManyField(
+        "post.Post",
+        verbose_name="좋아요 누른 Post 목록",
+        related_name = "like_user",
+        blank = True,
+    )
+    following = models.ManyToManyField(
+        "self",
+        verbose_name = "팔로우 중인 사용자들",
+        related_name = "follower",
+        symmetrical = False,
+        through = "user.Relationship",
+    )
+
     def __str__(self):
         return self.username
+    
+class Relationship(models.Model):
+    from_user = models.ForeignKey(
+        "user.User",
+        verbose_name = "팔로우를 요청한 사용자",
+        related_name = "following_relationships",
+        on_delete = models.CASCADE,
+    )
+    to_user = models.ForeignKey(
+        "user.User",
+        verbose_name = "팔로우 요청의 대상",
+        related_name = "follower_relationships",
+        on_delete = models.CASCADE,
+    )
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"관계 ({self.from_user} -> {self.to_user})"
+
 
     
