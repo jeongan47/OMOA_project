@@ -28,19 +28,19 @@
     <div class="image-link">
         <div class="d-flex justify-content-around">
             <!--  넷플릭스 이미지를 누르면 넷플릭스 페이지로 이동~-->
-            <a href="{% url 'post:netflix' %}">
+            <a href="{% url 'post:ott_view' ott='Netflix' %}">
                 <img src="https://images.justwatch.com/icon/207360008/s100/netflix.avif" class="radius_img_2">
             </a>
             <!--  아마존 이미지를 누르면 아마존 페이지로 이동~-->
-            <a href="{% url 'post:amazon' %}">
+            <a href="{% url 'post:ott_view' ott='Amazon' %}">
                 <img src="https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.avif" class="radius_img_2">
             </a>
             <!--  디즈니 이미지를 누르면 디즈니 페이지로 이동~-->
-            <a href="{% url 'post:disney' %}">
+            <a href="{% url 'post:ott_view' ott='Disney' %}">
                 <img src="https://images.justwatch.com/icon/313118777/s100/disneyplus.avif" class="radius_img_2">
             </a>
             <!--  웨이브 이미지를 누르면 웨이브 페이지로 이동~-->
-            <a href="{% url 'post:wavve' %}">
+            <a href="{% url 'post:ott_view' ott='wavve' %}">
                 <img src="https://images.justwatch.com/icon/155655742/s100/wavve.avif" class="radius_img_2">
             </a>
         </div>

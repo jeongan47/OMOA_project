@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ post.content_name }}</title>
+</head>
+<body>
+    <li class="post">
+        <img src="{{ post.post_image }}">
+    </li>
+    <li>
+        <p>제목 : {{ post.content_name }}</p>
+    </li>
+    <li>
+        <p>감독 : </p>
+        {% for dir in post.content_dir %}
+        <p>{{dir}} 
+        </p>
+        {% endfor %}
+    </li>
+    <li>
+        <p>장르: {{ post.content_genre }}</p>
+    </li>
+    <li>
+        <p>개봉년도: {{ post.content_year }}</p>
+    </li>
+    <li>
+        <p>OTT: {{ post.content_ott }}</p>
+    </li>
+    <li>
+        <p>시놉시스: {{ post.content_description }}</p>
+    </li>
+</body>
+</html>

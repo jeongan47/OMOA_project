@@ -9,38 +9,39 @@ def ott_choice(request):
 
     return render(request,"post/ott_choice.html")
 
-def netflix(request):
+def ott_view(request, ott):
     if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
         return redirect("user:login")
-    posts = Post.objects.filter(content_ott__contains="Netflix")
+
+    posts = Post.objects.filter(content_ott__contains=ott)
     context = {
         "posts": posts
     }
+
     return render(request,"post/post_list.html",context)
 
-def amazon(request):
+def post_detail(request, id):
     if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
         return redirect("user:login")
-    posts = Post.objects.filter(content_ott__contains="Amazon")
-    context = {
-        "posts": posts
-    }
-    return render(request,"post/post_list.html",context)
+    
+    post = Post.objects.get(id = id)
 
-def disney(request):
-    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
-        return redirect("user:login")
-    posts = Post.objects.filter(content_ott__contains="Disney Plus")
-    context = {
-        "posts": posts
-    }
-    return render(request,"post/post_list.html",context)
+    content_dir_list = eval(post.content_dir)
+    post.content_dir = []
 
-def wavve(request):
-    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
-        return redirect("user:login")
-    posts = Post.objects.filter(content_ott__contains="wavve")
+    for i in content_dir_list:
+        post.content_dir.append(i.strip(',').strip())
+    
+    content_genre_list = eval(post.content_genre)
+    post.content_genre = []
+
+    for i in content_genre_list:
+        post.content_genre.append(i.strip())
+
+    post.content_ott = eval(post.content_ott)
+
     context = {
-        "posts": posts
+        "post": post
     }
-    return render(request,"post/post_list.html",context)
+
+    return render(request,"post/post_detail.html",context)
