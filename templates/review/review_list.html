@@ -1,14 +1,38 @@
-{% load static %}
-<!doctype html>
-<html lang="ko">
+<html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ReviewList</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <h1>작품 Review 게시판</h1>
   </head>
   <body>
-    <h1></h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <nav>
+        <a href="{% url 'post:ott_view' ott='Netflix' %}">
+          <img src="https://images.justwatch.com/icon/207360008/s100/netflix.avif">
+        </a>
+                <!--  아마존 이미지를 누르면 아마존 페이지로 이동~-->
+        <a href="{% url 'post:ott_view' ott='Amazon' %}">
+            <img src="https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.avif">
+        </a>
+        <!--  디즈니 이미지를 누르면 디즈니 페이지로 이동~-->
+        <a href="{% url 'post:ott_view' ott='Disney' %}">
+            <img src="https://images.justwatch.com/icon/313118777/s100/disneyplus.avif">
+        </a>
+        <!--  웨이브 이미지를 누르면 웨이브 페이지로 이동~-->
+        <a href="{% url 'post:ott_view' ott='wavve' %}">
+            <img src="https://images.justwatch.com/icon/155655742/s100/wavve.avif">
+        </a>
+        <div id ="post-list">
+          <!-- 글 목록을 ul(Unordered List) 요소 내에 표시-->
+          <ul class="posts">
+            <!-- for로 순회하면서 각각의 글은 li(List Item) 요소로 표시-->
+             {% for review in reviews %}
+                <li class="post">
+                    <div>
+                        <!-- 각각의 글의 제목과 내용을 나누어 표시-->
+                        <a href="{% url 'review:review_list' %}">{{ review.title }}</a>
+                     </div>
+                </li>
+              {% endfor %}
+            </ul>
+        </div>
+    </nav>
   </body>
 </html>
