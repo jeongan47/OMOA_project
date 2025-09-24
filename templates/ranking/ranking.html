@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OMOA - Ranking</title>
+    <link href="{% static 'css/style2.css' %}" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Table Product -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Neflix Moive Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for nrank in netflix_movieranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ nrank.content_rank }}</td>
+                                <td>{{ nrank.content_name }}</td>
+                                <td>{{ nrank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-header">
+                    <h2>Neflix Tv Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for nrank in netflix_tvranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ nrank.content_rank }}</td>
+                                <td>{{ nrank.content_name }}</td>
+                                <td>{{ nrank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Amazon Movie Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for arank in amazon_movieranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ arank.content_rank }}</td>
+                                <td>{{ arank.content_name }}</td>
+                                <td>{{ arank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="card-header">
+                    <h2>Amazon Tv Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for arank in amazon_tvranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ arank.content_rank }}</td>
+                                <td>{{ arank.content_name }}</td>
+                                <td>{{ arank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Disney Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for drank in disney_ranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ drank.content_rank }}</td>
+                                <td>{{ drank.content_name }}</td>
+                                <td>{{ drank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="card card-default">
+                <div class="card-header">
+                    <h2>Wavve Movie Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for wrank in wavve_movieranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ wrank.content_rank }}</td>
+                                <td>{{ wrank.content_name }}</td>
+                                <td>{{ wrank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="card-header">
+                    <h2>Wavve Tv Top N</h2>
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <table id="productsTable" class="table table-hover table-product" style="width:100%">
+                        <tbody>
+                            {% for wrank in wavve_tvranks %}
+                            <tr>
+                                <td class="py-0">
+                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
+                                </td>
+                                <td>{{ wrank.content_rank }}</td>
+                                <td>{{ wrank.content_name }}</td>
+                                <td>{{ wrank.content_period }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

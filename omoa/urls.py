@@ -23,4 +23,5 @@ urlpatterns = [
     path("user/", include("user.urls")),
     path("post/", include("post.urls")),
     path("review/", include("review.urls")),
+    path("", include("ranking.urls")),
 ]
