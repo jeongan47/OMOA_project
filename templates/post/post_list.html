@@ -9,9 +9,9 @@
     {% for post in posts %}
     <li class="post">
         <div>
-            <a href="{% url 'post:post_detail' id=post.id %}">{{ post.content_name }}</a>
+            <a href="{% url 'post:post_detail' id=post.id %}"><img src="{{ post.post_image }}"></a>
         </div>
-        <img src="{{ post.post_image }}">
+        
     </li>
     {% endfor %}
 </body>
