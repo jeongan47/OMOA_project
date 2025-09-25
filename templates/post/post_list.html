@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -6,6 +7,10 @@
 </head>
 
 <body>
+    <form method ="GET">
+        <input placeholder="제목 연관 검색창" name="q">
+        <button type="submit" class="btn btn-primary">검색하기</button>
+    </form>
     {% for post in posts %}
     <li class="post">
         <div>
