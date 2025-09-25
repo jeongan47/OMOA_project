@@ -1,7 +1,9 @@
 from django.contrib import admin
 from ranking.models import Netflix_movieRank, Netflix_tvRank, Amazon_movieRank, Amazon_tvRank, Disney_Rank, Wavve_movieRank, Wavve_tvRank
+from ranking.models import Last_update
 # Register your models here.
 
+admin.site.register(Last_update)
 admin.site.register(Netflix_movieRank)
 admin.site.register(Netflix_tvRank)
 admin.site.register(Amazon_movieRank)
