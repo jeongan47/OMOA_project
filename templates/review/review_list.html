@@ -27,7 +27,8 @@
                 <li class="post">
                     <div>
                         <!-- 각각의 글의 제목과 내용을 나누어 표시-->
-                        <a href="{% url 'review:review_list' %}">{{ review.title }}</a>
+                        <a href="{% url 'review:review_detail' review.id %}">{{ review.title }}</a>
+                        <img src="{{ review.post.post_image }}">
                      </div>
                 </li>
               {% endfor %}

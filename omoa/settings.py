@@ -15,6 +15,7 @@ from pathlib import Path
 # 커스텀 유저 모델 사용법 : {APP 이름}.{Model 이름}
 AUTH_USER_MODEL = "user.User"
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 TEM = BASE_DIR/"templates"
