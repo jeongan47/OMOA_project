@@ -5,7 +5,7 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = [
-            "post",
+            "review",
             "content",
         ]
         widgets = {
@@ -20,8 +20,13 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields =[
-            "user",
-            "post",
             "title",
             "content",
         ]
+        widgets = {
+            "content": forms.Textarea(
+                attrs = {
+                    "placeholder":"내용을 입력해주세요",
+                }
+            )
+        }

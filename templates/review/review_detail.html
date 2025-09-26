@@ -1,12 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-        <h1>{{ reviews.title }}</h1>
-        <h1>{{ reviews.post.content_name }}</h1>
-        <h2>{{ reviews.content }}</h2>
+    <h1>{{ review.post.content_name }}의 후기</h1>
+    <a href="{% url 'post:post_detail' review.post_id %}"> 
+        <img src="{{ review.post.post_image }}">
+    </a>
+    {{ review.title }}
+    {{ review.user }}
+    {{ review.content }}
+    {{ review.created }}
+    </form>
+    <span>Comments({{ review.comment_set.count }})</span>
+    <a href="{% url 'review:review_list' %}">게시판으로 가기</a>
+        <div class="review-comments">
+            <ul>
+                {% for comment in review.comment_set.all %}
+                    <li>
+                    <span>{{ comment.user.username }}</span>
+                    <span>{{ comment.content }}</span>
+
+                    <!-- 댓글 삭제 Form 추가 -->
+                    {% if user == comment.user %}
+                        <form method="POST" action="{% url 'review:comment_delete' comment.id %}">
+                            {% csrf_token %}
+                            <button type="submit">삭제</button>
+                        </form>
+                    {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="review-comment-create">
+            <form method="POST" action="{% url 'review:comment_add' %}">
+                {% csrf_token %}
+                <!-- 사용자가 직접 입력하지 않는 고정된 데이터를 form 내부에 위치-->
+                <input type="hidden" name="review" value="{{ review.id }}">
+                <!-- 전달된 CommentForm의 필드들 중, "content"필드만 렌더링-->
+                {{ comment_form.content }}
+                <button type="submit">게시</button>
+            </form>
+        </div>
 </body>
 </html>

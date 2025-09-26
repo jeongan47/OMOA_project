@@ -25,8 +25,7 @@ class ReviewAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = [
         "id",
-        "post",
+        "review",
         "content",
-        "title",
         "created",
     ]

@@ -1,17 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div id="review-add">
         <h1>Review 작성</h1>
-        <form method="POST">
+        <h2>{{ post.content_name }} Review</h2>
+        <form method="POST" action="{% url 'review:review_add' post.id %}">
             {% csrf_token %}
-            <div>
-                <input id="post.id">
-            </div>
+            <input type="hidden" name="post" value="{{ post.id }}">
             {{ form.as_p }}
             <button type="submit">업로드</button>
         </form>
