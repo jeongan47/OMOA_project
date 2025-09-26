@@ -10,7 +10,7 @@ def review_list(request):
     context = {
         "reviews": reviews,
         }
-    return render(request,"review/review_list.html",context)
+    return render(request,"review/review_list.html", context)
 
 def review_add(request):
     if request.method =="POST":
@@ -28,4 +28,4 @@ def review_add(request):
         form = ReviewForm()   
     
     context ={"form": form}
-    return render(request,"review/review_add.html",context)
+    return render(request,"review/review_add.html", context)

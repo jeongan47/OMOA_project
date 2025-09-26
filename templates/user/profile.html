@@ -1,23 +1,27 @@
 <body>
-<div id="profile">
     <div id="profile">
-        <div class="info">
-            <!-- 프로필 이미지 영역-->
-            {% if user.profile_image %}
+        <div id="profile">
+            <div class="info">
+                <!-- 프로필 이미지 영역-->
+                {% if user.profile_image %}
                 <img src="{{ user.profile_image.url }}">
-            {% endif %}
-            <!-- 사용자 정보 영역 -->
+                {% endif %}
+                <!-- 사용자 정보 영역 -->
+            </div>
             <div class="info-texts">
                 <h1>{{ user.username }}</h1>
                 <div class="counts">
                     <dl>
                         <dt>Posts</dt>
-                        <dd>{{ user.post_set.count }}</dd>
-                        <dt>Followers</dt>
-                        <dd>{{ user.followers.count }}</dd>
+                        <dd>{{ user.like_posts.count }}</dd>
                         <dt>Following</dt>
                         <dd>{{ user.following.count }}</dd>
                     </dl>
+                </div>
+                <div>
+                    {% for f in user.following.all %}
+                    <a href="{% url 'user:mypage' id=f.id %}">{{ f.username }}</a>
+                    {% endfor %}
                 </div>
                 <p>{{ user.short_description }}</p>
             </div>
@@ -25,15 +29,28 @@
         <!-- 사용자가 작성한 Post 목록 -->
         <div class="post-grid-container">
             {% for post in user.post_set.all %}
-                {% if post.postimage_set.first %}
-                <div class="post-gird">
-                    <a href="{% url 'post:detail' post_id=post.id %}">
-                        <img src="{{ post.postimage_set.first.photo.url }}" alt="">
-                    </a>
-                </div>
-                {% endif %}
+            {% if post.postimage_set.first %}
+            <div class="post-gird">
+                <a href="{% url 'post:post_detail' post_id=post.id %}">
+                    <img src="{{ post.postimage_set.first.photo.url }}" alt="">
+                </a>
+            </div>
+            {% endif %}
+            <div class="post-gird">
+                <a href="{% url 'user:mypage' post_id=post.id %}">
+                    <img src="{{ post.postimage_set.first.photo.url }}" alt="">
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+        <!-- 사용자가 좋아요 한 Post 목록 -->
+        <div class="post-grid-container">
+            {% for post in user.like_posts.all %}
+            <a href="{% url 'post:post_detail' id=post.id %}">
+                <img src="{{ post.post_image }}">
+            </a>
             {% endfor %}
         </div>
     </div>
-</div>
+    </div>
 </body>
