@@ -13,7 +13,7 @@ def review_list(request):
     context = {
         "reviews": reviews,
         }
-    return render(request,"review/review_list.html",context)
+    return render(request,"review/review_list.html", context)
 
 def review_add(request, post_id):
     post = Post.objects.get(pk=post_id)
@@ -39,6 +39,7 @@ def review_add(request, post_id):
 def review_detail(request,review_id):
     comment_form = CommentForm()
     
+<<<<<<< HEAD
     review = Review.objects.get(pk=review_id)
     context = {
         "review":review,
@@ -69,3 +70,7 @@ def comment_delete(request, comment_id):
     
     else:
         return HttpResponseForbidden("이 댓글을 삭제할 권한이 없습니다")
+=======
+    context ={"form": form}
+    return render(request,"review/review_add.html", context)
+>>>>>>> origin/main

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models.query_utils import Q
 from post.models import Post 
+from review.forms import ReviewForm
 from django.urls import reverse
 # Create your views here.
     
@@ -49,12 +50,15 @@ def post_detail(request, id):
         post.content_genre.append(i.strip())
 
     post.content_ott = eval(post.content_ott)
-
+    review_form = ReviewForm()
+    
     context = {
-        "post": post
+        "post": post,
+        "review_form":review_form,
     }
 
     return render(request,"post/post_detail.html", context)
+
 
 def post_search(request):
     query = request.GET.get("q")
@@ -66,14 +70,18 @@ def post_search(request):
     context = {"content_name": search}
     return render(request, "post/post_list.html", context)
 
-def wish_list(request, post_id):
-    wish = Post.objects.get(id = post_id)
+def my_list(request, post_id):
+    my = Post.objects.get(id = post_id)
     user = request.user
+# 사용자가 "좋아요를 누른 Post 목록"에 "좋아요 버튼을 누른 Post"가 존재한다면
+    if user.like_posts.filter(id = my.id).exists():
+       # My 목록에서 삭제
+       user.like_posts.remove(my)
 
-    if user.like_posts.filter(id = wish.id).exists():
-        user.like_posts.remove(post)
-
+     # 존재하지 않는다면 My 목록에 추가
     else: 
-        user.like_posts.add(wish)
+        user.like_posts.add(my)
+ # next로 값이 전달되었다면 해당 위치로, 전달되지 않았다면 피드페이지에서 해당 Post위치로 이동
+    url_next = request.GET.get("next") or reverse("post:") + f"#post-{my.id}"
 
-    url_next = request.GET.get("next") or reverse("post:") + f"#post-{post.id}"
+    return redirect(url_next)
