@@ -17,9 +17,9 @@
                 <div class="card-header">
                     <h2>Neflix Movie Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                        <!-- <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
+                        </a> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -27,10 +27,10 @@
                         <tbody>
                             {% for nrank in netflix_movieranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ nrank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ nrank.content_img }}" alt="">
+                                </td>
                                 <td>{{ nrank.content_name }}</td>
                                 <td>{{ nrank.content_period }}</td>
                             </tr>
@@ -42,9 +42,6 @@
                 <div class="card-header">
                     <h2>Neflix Tv Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -52,10 +49,10 @@
                         <tbody>
                             {% for nrank in netflix_tvranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ nrank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ nrank.content_img }}" alt="">
+                                </td>
                                 <td>{{ nrank.content_name }}</td>
                                 <td>{{ nrank.content_period }}</td>
                             </tr>
@@ -69,9 +66,6 @@
                 <div class="card-header">
                     <h2>Amazon Movie Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -79,10 +73,10 @@
                         <tbody>
                             {% for arank in amazon_movieranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ arank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ arank.content_img }}" alt="">
+                                </td>
                                 <td>{{ arank.content_name }}</td>
                                 <td>{{ arank.content_period }}</td>
                             </tr>
@@ -94,9 +88,6 @@
                 <div class="card-header">
                     <h2>Amazon Tv Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -104,10 +95,10 @@
                         <tbody>
                             {% for arank in amazon_tvranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ arank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ arank.content_img }}" alt="">
+                                </td>
                                 <td>{{ arank.content_name }}</td>
                                 <td>{{ arank.content_period }}</td>
                             </tr>
@@ -121,9 +112,6 @@
                 <div class="card-header">
                     <h2>Disney Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -131,10 +119,10 @@
                         <tbody>
                             {% for drank in disney_ranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ drank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ drank.content_img }}" alt="">
+                                </td>
                                 <td>{{ drank.content_name }}</td>
                                 <td>{{ drank.content_period }}</td>
                             </tr>
@@ -148,9 +136,6 @@
                 <div class="card-header">
                     <h2>Wavve Movie Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -158,10 +143,10 @@
                         <tbody>
                             {% for wrank in wavve_movieranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ wrank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ wrank.content_img }}" alt="">
+                                </td>
                                 <td>{{ wrank.content_name }}</td>
                                 <td>{{ wrank.content_period }}</td>
                             </tr>
@@ -172,9 +157,6 @@
                 <div class="card-header">
                     <h2>Wavve Tv Top N</h2>
                     <div class="dropdown">
-                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false"> Yearly Chart
-                        </a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -182,10 +164,10 @@
                         <tbody>
                             {% for wrank in wavve_tvranks %}
                             <tr>
-                                <td class="py-0">
-                                    <img src="images/products/products-xs-01.jpg" alt="Product Image">
-                                </td>
                                 <td>{{ wrank.content_rank }}</td>
+                                <td class="py-0">
+                                    <img src="{{ wrank.content_img }}" alt="">
+                                </td>
                                 <td>{{ wrank.content_name }}</td>
                                 <td>{{ wrank.content_period }}</td>
                             </tr>
