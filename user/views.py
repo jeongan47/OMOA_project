@@ -122,4 +122,10 @@ def follow(request, user_id):
     url_next = request.GET.get("next") or reverse("user:profile", args=[user.id])
     return redirect(url_next)
 
+def my_page(request, id):
+    user = User.objects.get(id = id)
+    context = {"user": user}
 
+    print(user.like_posts.all())
+
+    return render(request, "user/profile.html", context)

@@ -1,22 +1,25 @@
-{% load static %}    <!--최상단에 작성하며, 이걸 쓰면 {% static '파일경로/파일명' %} 사용 가능-->
+{% load static %} <!--최상단에 작성하며, 이걸 쓰면 {% static '파일경로/파일명' %} 사용 가능-->
 <html>
-  <head>
-    <link rel = "stylesheet" href = "{% url 'post:choice' %}">
-    <title>OTT</title>
-   <!-- link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"-->
-    <!-- 여기서 static 경로는 settings.py에서 설정한 BASE_DIR/static임. 따라서 static 폴더를 탐색함-->
-    <!-- link rel="stylesheet" href="{% static 'bootstrap-icons-1.11.3/font/bootstrap-icons.css' %}" -->
-    <!-- "/" 로 계속 폴더 타고 들어가서 css 파일 적어주면 됨 -->
-  </head>
-  <body>
-    {% block content %} {% endblock %}  <!-- content라는 이름을 가진 block을 쳐놓음—>
-  </body>
-  
-  <!-- As a link -->
+
+<head>
+  <link rel="stylesheet" href="{% url 'post:choice' %}">
+  <title>OTT</title>
+  <!-- link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"-->
+  <!-- 여기서 static 경로는 settings.py에서 설정한 BASE_DIR/static임. 따라서 static 폴더를 탐색함-->
+  <!-- link rel="stylesheet" href="{% static 'bootstrap-icons-1.11.3/font/bootstrap-icons.css' %}" -->
+  <!-- "/" 로 계속 폴더 타고 들어가서 css 파일 적어주면 됨 -->
+</head>
+
+<body>
+  {% block content %} {% endblock %} <!-- content라는 이름을 가진 block을 쳐놓음 -->
+</body>
+
+<!-- As a link -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
@@ -37,6 +40,7 @@
     </div>
   </div>
 </nav>
-  </div>
+</div>
 </nav>
+
 </html>
