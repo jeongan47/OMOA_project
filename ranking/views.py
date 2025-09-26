@@ -4,6 +4,7 @@ from ranking.models import Netflix_movieRank, Netflix_tvRank, Amazon_movieRank, 
 # Create your views here.
 def omoa_home(request):
     return redirect("ranking:ranking")
+    
 
 def ranking_page(request):
 
