@@ -10,28 +10,6 @@
 </head>
 
 <body>
-<<<<<<< HEAD
-<div id="profile">
-    <div id="profile">
-        <div class="info">
-            <!-- 프로필 이미지 영역-->
-            {% if user.profile_image %}
-                <img src="{{ user.profile_image.url }}">
-            {% endif %}
-            <!-- 사용자 정보 영역 -->
-            <div class="info-texts">
-                <h1>{{ user.username }}</h1>
-                <div class="counts">
-                    <dl>
-                        <dt>Posts</dt>
-                        <dd>{{ user.post_set.count }}</dd>
-                        <dt>Followers</dt>
-                        <dd>{{ user.followers.count }}</dd>
-                        <dt>Following</dt>
-                        
-                        <dd>{{ user.following.count }}</dd>
-                    </dl>
-=======
     <main class="flex-shrink-0">
         <!-- Header-->
         <header class="bg-dark py-5">
@@ -73,58 +51,18 @@
                             </div>
                             {% endfor %}
 
-                            <!-- <div class="col mb-5 mb-md-0 h-100">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
-                                        class="bi bi-toggles2"></i></div>
-                                <h2 class="h5">Featured title</h2>
-                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is
-                                    just a bit more text.</p>
-                            </div>
-                            <div class="col h-100">
-                                <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i
-                                        class="bi bi-toggles2"></i></div>
-                                <h2 class="h5">Featured title</h2>
-                                <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is
-                                    just a bit more text.</p>
-                            </div> -->
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Testimonial section-->
-        <div class="py-5 bg-light">
-            <div class="container px-5 my-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10 col-xl-7">
-                        <div class="text-center">
-                            <div class="fs-4 mb-4 fst-italic">"Working with Start Bootstrap templates has saved me tons
-                                of development time when building new projects! Starting with a Bootstrap template just
-                                makes things easier!"</div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d"
-                                    alt="..." />
-                                <div class="fw-bold">
-                                    Tom Ato
-                                    <span class="fw-bold text-primary mx-1">/</span>
-                                    CEO, Pomodoro
-                                </div>
-                            </div>
-                        </div>
-                    </div>
->>>>>>> origin/main
-                </div>
-            </div>
-        </div>
         <!-- Blog preview section-->
         <section class="py-5">
             <div class="container px-5 my-5">
-                <div class="row gx-5 justify-content-center">
+                <div class="row gx-5 justify-content-center" style="margin-bottom : 25px">
                     <div class="col-lg-8 col-xl-6">
                         <div class="text-center">
-                            <h2 class="fw-bolder">From our blog</h2>
-                            <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                            <h2 class="fw-bolder">내가 팔로우한 큐레이터</h2>
                         </div>
                     </div>
                 </div>
@@ -134,7 +72,8 @@
                         <div class="card h-100 shadow border-0">
                             <img class="card-img-top" src="{{ f.profile_image.url }}" alt="..." />
                             <div class="card-body p-4">
-                                <a class="text-decoration-none link-dark stretched-link" href="{% url 'user:mypage' id=f.id %}">
+                                <a class="text-decoration-none link-dark stretched-link"
+                                    href="{% url 'user:mypage' id=f.id %}">
                                     <h5 class="card-title mb-3">{{ f.username }}</h5>
                                 </a>
                                 <p class="card-text mb-0">Some quick example text to build on the card title and make up
@@ -147,7 +86,7 @@
                         </div>
                     </div>
                     {% endfor %}
-                    
+
                 </div>
                 <!-- Call to action-->
             </div>
