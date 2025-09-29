@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
                         {% if user.profile_image %}
-                        <img src="{{ user.profile_image.url }}">
+                        <img src="{{ user.profile_image.url }}" width="300">
                         {% else %}
                         <img src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
                         {% endif %}
@@ -37,7 +37,7 @@
             <div class="container px-5 my-5">
                 <div class="row gx-5">
                     <div class="col-lg-2 mb-5 mb-lg-0">
-                        <h2 class="fw-bolder mb-0">내가 찜한 컨텐츠</h2>
+                        <h2 class="fw-bolder mb-0">{{ user.username }}의 찜한 컨텐츠</h2>
                     </div>
                     <div class="col-lg-10">
                         <div class="row gx-5 row-cols-1 row-cols-md-2">
@@ -62,7 +62,7 @@
                 <div class="row gx-5 justify-content-center" style="margin-bottom : 25px">
                     <div class="col-lg-8 col-xl-6">
                         <div class="text-center">
-                            <h2 class="fw-bolder">내가 팔로우한 큐레이터</h2>
+                            <h2 class="fw-bolder">{{ user.username }}의 팔로우 목록</h2>
                         </div>
                     </div>
                 </div>

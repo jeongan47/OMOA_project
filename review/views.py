@@ -51,6 +51,8 @@ def review_detail(request,review_id):
 def comment_add(request):
     form = CommentForm(data = request.POST)
 
+    print("commentadd!")
+    
     if form.is_valid():
         # commit = False 옵션으로 메모리상에 Comment 객체 생성
         comment = form.save(commit = False)

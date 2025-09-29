@@ -74,13 +74,6 @@ def signup(request):
     }
     return render(request, "user/signup.html", context)
 
-def profile(request,user_id):
-    user = get_object_or_404(User, id = user_id)
-    context = {
-        "user":user,
-    }
-    return render(request, "user/profile.html",context)
-
 def followers(request, user_id):
     user = get_object_or_404(User, id=user_id)
     relationships = user.follower_relationships.all()
