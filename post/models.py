@@ -10,3 +10,6 @@ class Post(models.Model):
     content_genre = models.CharField("장르", blank=True,null=True)
     post_image = models.CharField("포스터", blank=True,null=True)
     content_year = models.CharField("개봉년도", max_length=4, blank=True,null=True)
+    
+    def __str__(self):
+        return self.content_name
