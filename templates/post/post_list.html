@@ -3,10 +3,44 @@
 <html lang="ko">
 
 <head>
+<<<<<<< HEAD
     <title>OMOA-List</title>
+=======
+    <title>Netflix</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/styles3.css' %}" rel="stylesheet" />
+>>>>>>> review-프론트
 </head>
 
 <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
+                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Netflix' %}">Netflix</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Amazon' %}">Amazon</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
+                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
+                              </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                      <a href="{% url 'user:logout' %}">Logout</a>
+                    </form>
+                </div>
+            </div>
+        </nav>
     <form method ="GET">
         <input placeholder="제목 연관 검색창" name="q">
         <button type="submit" class="btn btn-primary">검색하기</button>
@@ -20,5 +54,13 @@
     </li>
     {% endfor %}
 </body>
-
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </html>
