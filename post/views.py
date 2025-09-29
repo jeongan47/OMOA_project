@@ -61,6 +61,18 @@ def post_detail(request, id):
 
     return render(request,"post/post_detail.html", context)
 
+def post_detail_like(request, post_id):
+    print("like start!")
+    post = Post.objects.get(id = post_id)
+    user = request.user
+
+    print("post: ", post)
+    print("user: ", user)
+
+    # 유저가 찜한 목록에 이미 있다면 목록에서 지우고 없다면 목록에 추가
+    user.like_posts.remove(post) if user.like_posts.filter(id = post.id).exists() else user.like_posts.add(post)
+
+    return redirect("post:post_detail", id=post_id)
 
 def post_search(request):
     query = request.GET.get("q")
