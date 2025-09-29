@@ -56,6 +56,29 @@
                 </div>
             </div>
         </section>
+        <!-- Reviews section-->
+        <section class="py-5" id="features">
+            <div class="container px-5 my-5">
+                <div class="row gx-5">
+                    <div class="col-lg-2 mb-5 mb-lg-0">
+                        <h2 class="fw-bolder mb-0">{{ user.username }}님의 리뷰</h2>
+                    </div>
+                    <div class="col-lg-10">
+                        <div class="row gx-5 row-cols-1 row-cols-md-2">
+                            {% for review in user.review_set.all %}
+                            <div class="col mb-5 h-100">
+                                <a href="{% url 'post:post_detail' id=review.post.id %}">
+                                    <img src="{{ review.post.post_image }}">
+                                </a>
+                                <h2 class="h5">{{ review.post.content_name }}</h2>
+                            </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
         <!-- Blog preview section-->
         <section class="py-5">
             <div class="container px-5 my-5">

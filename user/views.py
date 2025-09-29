@@ -119,6 +119,4 @@ def my_page(request, id):
     user = User.objects.get(id = id)
     context = {"user": user}
 
-    print(user.like_posts.all())
-
     return render(request, "user/profile.html", context)

@@ -74,16 +74,6 @@ def post_detail_like(request, post_id):
 
     return redirect("post:post_detail", id=post_id)
 
-def post_search(request):
-    query = request.GET.get("q")
-    print("query:", query)
-    if query:
-        search = Post.objects.filter(content_name__contains = query)
-    else:
-        search = Post.objects.all()
-    context = {"content_name": search}
-    return render(request, "post/post_list.html", context)
-
 def my_list(request, post_id):
     my = Post.objects.get(id = post_id)
     user = request.user
