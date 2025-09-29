@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <!-- Table Product -->
+    <!-- Table Product --> <!-- .table.table-hover 에서 hover 시 색 지정 가능 -->
     <div class="row">
         <div class="col-12">
             <div class="card card-default">
@@ -27,12 +27,12 @@
                         <tbody>
                             {% for nrank in netflix_movieranks %}
                             <tr>
-                                <td style="width:5%">{{ nrank.content_rank }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ nrank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ nrank.content_img }}" alt="">
                                 </td>
-                                <td>{{ nrank.content_name }}</td>
-                                <td style="width:5%">{{ nrank.content_period }}</td>
+                                <td style="vertical-align: middle;">{{ nrank.content_name }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ nrank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -49,12 +49,12 @@
                         <tbody>
                             {% for nrank in netflix_tvranks %}
                             <tr>
-                                <td style="width:5%">{{ nrank.content_rank }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ nrank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ nrank.content_img }}" alt="">
                                 </td>
-                                <td>{{ nrank.content_name }}</td>
-                                <td style="width:5%">{{ nrank.content_period }}</td>
+                                <td style="vertical-align: middle;">{{ nrank.content_name }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ nrank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -73,12 +73,12 @@
                         <tbody>
                             {% for arank in amazon_movieranks %}
                             <tr>
-                                <td style="width:5%">{{ arank.content_rank }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ arank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ arank.content_img }}" alt="">
                                 </td>
-                                <td>{{ arank.content_name }}</td>
-                                <td style="width:5%">{{ arank.content_period }}</td>
+                                <td style="vertical-align: center;">{{ arank.content_name }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ arank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -95,12 +95,12 @@
                         <tbody>
                             {% for arank in amazon_tvranks %}
                             <tr>
-                                <td style="width:5%">{{ arank.content_rank }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ arank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ arank.content_img }}" alt="">
                                 </td>
-                                <td>{{ arank.content_name }}</td>
-                                <td style="width:5%">{{ arank.content_period }}</td>
+                                <td style="vertical-align: middle;">{{ arank.content_name }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ arank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -119,12 +119,12 @@
                         <tbody>
                             {% for drank in disney_ranks %}
                             <tr>
-                                <td style="width:5%">{{ drank.content_rank }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ drank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ drank.content_img }}" alt="">
                                 </td>
-                                <td>{{ drank.content_name }}</td>
-                                <td style="width:5%">{{ drank.content_period }}</td>
+                                <td style="vertical-align: middle; font-size: 20px;">{{ drank.content_name }}</td>
+                                <td style="width:5%; vertical-align: middle; text-align: center;">{{ drank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -143,12 +143,12 @@
                         <tbody>
                             {% for wrank in wavve_movieranks %}
                             <tr>
-                                <td style="width:5%">{{ wrank.content_rank }}</td>
+                                <td style="width:5%; text-align: center; vertical-align: middle;">{{ wrank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ wrank.content_img }}" alt="">
                                 </td>
-                                <td>{{ wrank.content_name }}</td>
-                                <td style="width:5%">{{ wrank.content_period }}</td>
+                                <td style="vertical-align: middle; font-size: 20px;">{{ wrank.content_name }}</td>
+                                <td style="width:5%; text-align: center; vertical-align: middle;">{{ wrank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -164,12 +164,12 @@
                         <tbody>
                             {% for wrank in wavve_tvranks %}
                             <tr>
-                                <td style="width:5%">{{ wrank.content_rank }}</td>
+                                <td style="width:5%; text-align: center; vertical-align: middle;">{{ wrank.content_rank }}</td>
                                 <td class="py-0" style="width:10%">
                                     <img src="{{ wrank.content_img }}" alt="">
                                 </td>
-                                <td>{{ wrank.content_name }}</td>
-                                <td style="width:5%">{{ wrank.content_period }}</td>
+                                <td style="vertical-align: middle; font-size: 20px;">{{ wrank.content_name }}</td>
+                                <td style="width:5%; text-align: center; vertical-align: middle;">{{ wrank.content_period }}</td>
                             </tr>
                             {% endfor %}
                         </tbody>

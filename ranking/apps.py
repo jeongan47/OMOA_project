@@ -140,7 +140,7 @@ def crawler(link, platform, mt):
 
         driver.get(link)
 
-        time.sleep(3)
+        time.sleep(5)
 
         soup = bs(driver.page_source, "lxml")
         
@@ -153,6 +153,7 @@ def crawler(link, platform, mt):
                                             content_name = m.div.a.select("div")[1].div.picture.img["alt"],
                                             content_img = m.div.a.select("div")[1].div.picture.img["src"])
                 num += 1
+            driver.quit()
 
         elif "tv" in mt: # tv프로그램일 경우
             num = 1
@@ -161,3 +162,5 @@ def crawler(link, platform, mt):
                                             content_name = m.div.a.select("div")[1].div.picture.img["alt"],
                                             content_img = m.div.a.select("div")[1].div.picture.img["src"])
                 num += 1
+            driver.quit()
+        

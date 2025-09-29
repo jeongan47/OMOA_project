@@ -101,6 +101,12 @@ def my_list(request, post_id):
     return redirect(url_next)
 
 def importExcel(request):
+    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버려
+        return redirect("user:login")
+
+    if not request.user.is_staff: # 권한이 없는 유저가 접근할 경우
+        return redirect("user:login")
+
     if request.method == 'POST':
         post_resource = PostResource()
         dataset = Dataset()
