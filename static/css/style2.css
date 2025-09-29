@@ -14411,7 +14411,7 @@ label {
 
 /* Produc Data Table */
 .table.table-hover tbody tr:hover {
-  background-color: #9e6de0;
+  background-color: #31343d8f;
   box-shadow: 0px 10px 18px 0px rgba(55, 103, 208, 0.2);
 }
 .table.table-hover tbody tr:hover td {
@@ -14446,8 +14446,8 @@ label {
 }
 .table.table-product tbody td img {
   border-radius: 5px;
-  max-width: 40px;
-  max-height: 48px;
+  max-width: 100%;
+  max-height: 150px;
 }
 
 /* Table Thead Border */

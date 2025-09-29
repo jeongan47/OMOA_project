@@ -58,11 +58,18 @@
                         <div class="col-md-9">
                             <!-- <div class="small mb-1">SKU: BST-498</div> -->
                             <h1 class="display-5 fw-bolder">{{ post.content_name }}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="35" fill="currentColor"
-                                    class="bi bi-suit-heart-fill" viewBox="0 0 16 16">
-                                    <path
-                                        d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1" />
-                                </svg>
+                                <form action="{% url 'post:post_detail_like' post_id=post.id %}" method="POST">
+                                    {% csrf_token %}
+                                    {% if user in post.like_user.all %}
+                                    <button type="submit" style="border: none; background-color: transparent" >
+                                        <img width="48" height="48" src="https://img.icons8.com/color/48/like--v1.png" alt="like--v1"/>
+                                    </button>
+                                    {% else %}
+                                    <button type="submit" style="border: none; background-color: transparent" >
+                                        <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/like--v1.png" alt="like--v1"/>
+                                    </button>
+                                    {% endif %}
+                                </form>
                             </h1>
                             <div class="fs-5 mb-5">
                                 <span>({{ post.content_year }})</span>
