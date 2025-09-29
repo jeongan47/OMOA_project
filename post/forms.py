@@ -11,3 +11,8 @@ class ReviewForm(forms.ModelForm):
             "content",
         ]
         
+
+class PostForm(forms.Form):
+    class meta:
+        model = Post
+        fields = '__all__'

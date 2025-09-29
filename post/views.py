@@ -3,6 +3,8 @@ from django.db.models.query_utils import Q
 from post.models import Post 
 from review.forms import ReviewForm
 from django.urls import reverse
+from tablib import Dataset
+from .xlimport import PostResource
 # Create your views here.
     
 def ott_choice(request):
@@ -37,19 +39,19 @@ def post_detail(request, id):
     
     post = Post.objects.get(id = id)
 
-    content_dir_list = eval(post.content_dir)
-    post.content_dir = []
+    # content_dir_list = eval(post.content_dir)
+    # post.content_dir = []
 
-    for i in content_dir_list:
-        post.content_dir.append(i.strip(',').strip())
+    # for i in content_dir_list:
+    #     post.content_dir.append(i.strip(',').strip())
     
-    content_genre_list = eval(post.content_genre)
-    post.content_genre = []
+    # content_genre_list = eval(post.content_genre)
+    # post.content_genre = []
 
-    for i in content_genre_list:
-        post.content_genre.append(i.strip())
+    # for i in content_genre_list:
+    #     post.content_genre.append(i.strip())
 
-    post.content_ott = eval(post.content_ott)
+    # post.content_ott = eval(post.content_ott)
     review_form = ReviewForm()
     
     context = {
@@ -85,3 +87,25 @@ def my_list(request, post_id):
     url_next = request.GET.get("next") or reverse("post:") + f"#post-{my.id}"
 
     return redirect(url_next)
+
+def importExcel(request):
+    if request.method == 'POST':
+        post_resource = PostResource()
+        dataset = Dataset()
+        new_post = request.FILES['my_file']
+        imported_data = dataset.load(new_post.read(), format='xlsx')
+
+        for data in imported_data:
+            value = Post(
+                content_name = data[0],
+                content_description = data[1],
+                content_act = data[2],
+                content_dir = data[3],
+                content_ott = data[4],
+                content_genre = data[5],
+                post_image = data[6],
+                content_year = data[7]
+            )
+            value.save()
+
+    return render(request, 'post/form.html')
