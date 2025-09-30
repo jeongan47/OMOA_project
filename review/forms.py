@@ -12,6 +12,8 @@ class CommentForm(forms.ModelForm):
             "content": forms.Textarea(
                 attrs = {
                     "placeholder": "댓글 달기...",
+                    "class":"form-control",
+                    "rows":"3",
                 }
             )
         }

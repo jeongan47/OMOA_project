@@ -4,6 +4,7 @@ from post.models import Post
 from review.forms import ReviewForm, CommentForm    
 from django.views.decorators.http import require_POST
 from django.http import HttpResponseForbidden
+from django.db.models.query_utils import Q
 
 # Create your views here.
 def review_list(request):
@@ -72,3 +73,19 @@ def comment_delete(request, comment_id):
     
     else:
         return HttpResponseForbidden("이 댓글을 삭제할 권한이 없습니다")
+
+def review_list(request):
+    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
+        return redirect("user:login")
+    
+    query = request.GET.get("q")
+
+    if query:
+        reviews = Review.objects.filter(Q(title__contains = query)|Q(post__content_name__contains = query))
+    else:
+        reviews = Review.objects.all()
+
+    context = {
+        "reviews": reviews,
+        }
+    return render(request,"review/review_list.html", context)

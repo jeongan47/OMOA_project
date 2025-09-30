@@ -3,9 +3,7 @@
 <html lang="ko">
 
 <head>
-<<<<<<< HEAD
     <title>OMOA-List</title>
-=======
     <title>Netflix</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
@@ -13,7 +11,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles3.css' %}" rel="stylesheet" />
->>>>>>> review-프론트
 </head>
 
 <body>
@@ -35,24 +32,46 @@
                               </ul>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                      <a href="{% url 'user:logout' %}">Logout</a>
+                    <form class="d-flex" role="search" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="작품명으로my 검색" aria-label="Search" name="q" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
         </nav>
-    <form method ="GET">
-        <input placeholder="제목 연관 검색창" name="q">
-        <button type="submit" class="btn btn-primary">검색하기</button>
-    </form>
-    {% for post in posts %}
-    <li class="post">
-        <div>
-            <a href="{% url 'post:post_detail' id=post.id %}"><img src="{{ post.post_image }}"></a>
+    <header class="bg-dark py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">OMOA</h1>
+                <p class="lead fw-normal text-white-50 mb-0">OTT의 모든 것을 담다</p>
+            </div>
         </div>
-        
-    </li>
-    {% endfor %}
+    </header>
+        <!-- Section-->
+        <section class="bg-dark py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {% for post in posts %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <img class="card-img-top" src="{{ post.post_image }}" />
+                            <!-- Product details-->
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <!-- Product name-->
+                                    <h5 class="fw-bolder">{{ post.content_name }}</h5>
+                                </div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'post:post_detail' post.id %}">click</a></div>
+                            </div>
+                        </div>
+                    </div>
+                  {% endfor %}
+                </div>
+            </div>
+        </section>
 </body>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

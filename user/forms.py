@@ -6,13 +6,13 @@ class LoginForm(forms.Form):
     username = forms.CharField(
         min_length=5,
         widget = forms.TextInput(
-            attrs = {"placeholder": "사용자명 (5자리 이상)"},
+            attrs = {"placeholder": "5자리 이상 입력", "class":"input", "id":"user_name"},
         )
         )
     password = forms.CharField(
         min_length=8,
         widget = forms.PasswordInput(
-            attrs={"placeholder": "비밀번호 (8자리 이상)"},
+            attrs={"placeholder": "8자리 이상 입력", "class":"input", "id":"user_pass"},
         )
         )
     
@@ -20,23 +20,27 @@ class SignupForm(forms.Form):
     username = forms.CharField(
         min_length=5,
         widget = forms.TextInput(
-            attrs = {"placeholder": "사용자명 (5자리 이상)"},
+            attrs = {"placeholder": "5자리 이상 입력", "class":"input", "id":"user_name"},
         )
     )
     password1 = forms.CharField(
         min_length=8,
         widget = forms.PasswordInput(
-            attrs={"placeholder": "비밀번호 (8자리 이상)"},
+            attrs={"placeholder": "8자리 이상 입력", "class":"input", "id":"user_pass"},
         )
         )
     password2 = forms.CharField(
         min_length=8,
         widget = forms.PasswordInput(
-            attrs={"placeholder": "비밀번호 (8자리 이상)"},
+            attrs={"placeholder": "8자리 이상 입력", "class":"input", "id":"user_pass2"},
         )
         )
     profile_image = forms.ImageField()
-    short_description = forms.CharField()
+    short_description = forms.CharField(
+        widget = forms.TextInput(
+            attrs = {"class":"input"}
+        )
+    )
 
     def clean_username(self):
         username = self.cleaned_data["username"]

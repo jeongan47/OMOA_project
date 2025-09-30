@@ -3,13 +3,27 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>OMOA - MyPage</title>
-    <link href="{% static 'css/profile_styles.css' %}" rel="stylesheet" />
-</head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>{{ user.username}}의 리뷰목록</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon2.ico' %}" />
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="{% static 'css/liststyles.css' %}" rel="stylesheet" />
 
-<body>
+<style>
+    .background {
+        background-image: url("{{ review.post.post_image }}"); 
+        background-size: contain; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+}
+</style>
+</head>
+    <body>
+        <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
@@ -28,8 +42,9 @@
                               </ul>
                         </li>
                     </ul>
-                    <form class="d-flex">
-                      <a href="{% url 'user:logout' %}">Logout</a>
+                    <form class="d-flex" role="search" method="GET">
+                        <input class="form-control me-2" type="search" placeholder="작품명,게시물 제목으로 검색" aria-label="Search" name="q" />
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
             </div>
@@ -40,18 +55,6 @@
             <div class="container px-5">
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
-                        <p class="text-body-secondary text-white-50">
-                            찜한 컨텐츠
-                            <a href="{% url 'user:mylike' user.id %}" class="text-reset text-white-50">{{ user.like_posts.all.count }}개</a>
-                        </p>
-                        <p class="text-body-secondary text-white-50">
-                            리뷰
-                            <a href="{% url 'user:myreview' user.id %}" class="text-reset text-white-50">{{ user.review_set.all.count }}건</a>
-                        </p>
-                        <p class="text-body-secondary text-white-50">
-                            팔로잉
-                            <a href="{% url 'user:myfollow' user.id %}" class="text-reset text-white-50">{{ user.following.all.count }}명</a>
-                        </p>
                         <div class="my-5 text-center text-xl-start">
                             <h1 class="display-5 fw-bolder text-white mb-2">{{ user.username }}
                             </h1>
@@ -68,35 +71,7 @@
                 </div>
             </div>
         </header>
-        <!-- Features section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <h2 class="fw-bolder mb-0">{{ user.username }}의 찜한 컨텐츠, 총 {{ user.like_posts.all.count }}개</h2>
-                    {% for post in user.like_posts.all %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Sale badge-->
-                            <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">{{ post.content_ott }}</div>
-                            <!-- Product image-->
-                            <img class="card-img-top" src="{{ post.post_image }}" alt="..." />
-                            <!-- Product details-->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder">{{ post.content_name }}</h5>
-                                </div>
-                            </div>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'post:post_detail' post.id %}">click</a></div>
-                            </div>
-                        </div>
-                    </div>
-                  {% endfor %}
-                </div>
-            </div>
-        </section>
-        <!-- Reviews section-->
+    <!-- review section -->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
@@ -123,26 +98,6 @@
                             </div>
                         </div>
                     {% endfor %}
-                </div>
-            </div>
-        </section>
-        <!-- Blog preview section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <h2 class="fw-bolder">{{ user.username }}의 팔로우 목록, 총 {{ user.following.all.count }}명</h2>
-                  {% for f in user.following.all %}
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <img class="card-img-top" src="{{ f.profile_image.url }}" width="350" />
-                                    <h5 class="card-title mb-3 text-center">{{ f.username }}</h5>
-                                <p class="card-text mb-0 text-center">{{ f.short_description }}</p>
-                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'user:mypage' id=f.id %}">click</a></div>
-                            </div>
-                        </div>
-                    </div>
-                  {% endfor %}
                 </div>
             </div>
         </section>

@@ -1,9 +1,52 @@
-<div id="login">
-    <form method="POST">
-        <h1>OMOA</h1>
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-login">로그인</button>
-        <a href="{% url 'user:signup' %}">회원가입 페이지로 이동</a>
-    </form>
-</div>
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>OMOA-SignIn</title>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="{% static 'css/login.css' %}" rel="stylesheet" />
+    <script src="{% static 'js/login.js' %}"></script>
+</head>
+
+<body>
+    <!-- LOGIN MODULE -->
+    <div class="login">
+        <div class="wrap">
+            <div class="content">
+                <!-- LOGO -->
+                <div class="logo">
+                    <img src="http://res.cloudinary.com/dpcloudinary/image/upload/v1506186248/logo.png" alt="">
+                </div>
+                <div id="slideshow">
+                    <div class="one">
+                        <h2><span>OMOA</span></h2>
+                        <p>모든 컨텐츠를 한 곳에 모아</p>
+                    </div>
+                </div>
+            </div>
+            <!-- LOGIN FORM -->
+            <div class="user">
+                <div class="form-wrap">
+                    <!-- TABS -->
+                    <!-- TABS CONTENT -->
+                    <div class="tabs-content">
+                        <!-- TABS CONTENT LOGIN -->
+                        <div id="login-tab-content" class="active">
+                            <form class="login-form" action="" method="POST">
+                                {% csrf_token %}
+                                {{ form }}
+                                <input type="submit" class="button" value="Login">
+                            </form>
+                            <div class="help-action">
+                                <p><a class="forgot" href="{% url 'user:signup' %}">Sign Up</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

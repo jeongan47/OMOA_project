@@ -120,3 +120,24 @@ def my_page(request, id):
     context = {"user": user}
 
     return render(request, "user/profile.html", context)
+
+def my_likelist(request, id):
+    user = User.objects.get(id = id)
+
+    context = {"user": user}
+
+    return render(request, "user/mylike.html", context)
+
+def my_reviewlist(request, id):
+    user = User.objects.get(id = id)
+
+    context = {"user": user}
+
+    return render(request, "user/myreview.html", context)
+
+def my_followlist(request, id):
+    user = User.objects.get(id = id)
+
+    context = {"user": user}
+
+    return render(request, "user/myfollow.html", context)

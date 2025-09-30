@@ -1,19 +1,14 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="ko">
-
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="테스트1" />
-    <meta name="author" content="테스트2" />
-    <title>OMOA-{{ review.post.content_name}}의 Review</title>
-    <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
-    <!-- Bootstrap icons-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="{% static 'css/styles3.css' %}" rel="stylesheet" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>OMOA-{{ review.post.content_name}}의 Review</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon3.ico' %}" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/reviewstyles.css' %}" rel="stylesheet" />
 
 <style>
     .background {
@@ -23,11 +18,9 @@
         background-position: center; 
 }
 </style>
-
-</head>
-
-<body>
-    <!-- Responsive navbar-->
+    </head>
+    <body>
+        <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
                 <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
@@ -52,7 +45,7 @@
                 </div>
             </div>
         </nav>
-    <!-- Header-->
+            <!-- Header-->
         <header class="bg-dark py-5 background">
                 <div class="container px-4 px-lg-5 my-5">
                     <div class="display-4 fw-bolder">
@@ -64,82 +57,70 @@
                 </div>
             </div>
         </header>
-    <!-- Features section-->
-
-    <!-- Testimonials section-->
-    <section class="py-5 border-bottom">
-        <div class="container px-5 my-5 px-5">
-            <div class="text-center mb-5">
-                <h2 class="fw-bolder">{{ review.title }}</h2>
-                <p class="lead mb-0">{{ review.content }}</p>
-            </div>
-            <div class="row gx-5 justify-content-center">
-                <div class="col-lg-6">
-                    <!-- Testimonial 1-->
-                    {% for comment in review.comment_set.all %}
-                    <div class="card mb-4">
-                        <div class="card-body p-4">
-                            <div class="d-flex">
-                                <p class="mb-1">
-                                <div class="flex-shrink-0">
-                                    <a href="{% url 'user:mypage' comment.user.id %}">
-                                    <img src="{{ comment.user.profile_image.url }}" width="45",height="30">
-                                    </a>
+        <!-- Page content-->
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-8">
+                    <!-- Post content-->
+                    <article>
+                        <!-- Post header-->
+                        <header class="mb-4">
+                            <!-- Post title-->
+                            <h1 class="fw-bolder mb-1">{{ review.title }}</h1>
+                            <!-- Post meta content-->
+                            <div class="text-muted fst-italic mb-2">{{ review.created }}</div>
+                            <!-- Post categories-->
+                            <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'user:mypage' user.id %}">{{ review.user.username}} </a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'post:post_detail' review.post_id %}">{{review.post.content_name }}</a>
+                        </header>
+                        <!-- Post content-->
+                        <section class="mb-5">
+                            <p class="fs-5 mb-4">{{ review.content }}
+                        </section>
+                    </article>
+                    <!-- Comments section-->
+                    <section class="mb-5">
+                        <div class="card bg-light">
+                            <div class="card-body">
+                                <!-- Comment form-->
+                                    <form method="POST" action="{% url 'review:comment_add' %}">
+                                    {% csrf_token %}
+                                    {{ comment_form.content }}
+                                        <input type="hidden" name="review" value="{{ review.id }}">
+                                        <button type="submit" class="btn btn-primary">작성</button>
+                                    </form>
+                                {% for comment in review.comment_set.all %}
+                                <div class="d-flex">
+                                    <a href="{% url 'user:mypage' comment.user.id %}"></a>
+                                    <div class="flex-shrink-0"><img class="rounded-circle" src="{{ comment.user.profile_image.url }}" width="45",height="30" /></div>
+                                    <div class="ms-3">
+                                        <a href="{% url 'user:mypage' comment.user.id %}">
+                                        <div class="fw-bold">{{ comment.user.username }}</div>
+                                        </a>
+                                        {{ comment.content }}
+                                    </div>
                                 </div>
-                                </p>
+                                    <!-- 댓글 삭제 Form 추가 -->
+                                    {% if user == comment.user %}
+                                    <form method="POST" action="{% url 'review:comment_delete' comment.id %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-primary">삭제</button>
+                                    </form>
+                                    {% endif %}
+                                {% endfor%}
                             </div>
-                            <div class="ms-4">
-                                    {{ comment.content }}
-                                <div class="small text-muted">
-                                    <a href="{% url 'user:mypage' comment.user.id %}">
-                                        - {{ comment.user.username }}
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- 댓글 삭제 Form 추가 -->
-                            {% if user == comment.user %}
-                            <form method="POST" action="{% url 'review:comment_delete' comment.id %}">
-                                {% csrf_token %}
-                                <button type="submit">삭제</button>
-                            </form>
-                            {% endif %}
                         </div>
-                    </div>
-                    {% endfor %}
+                    </section>
                 </div>
-                </div>
-                <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-                    <div class="align-items-center">
-                        <div class="review-comment-create">
-                            <form method="POST" action="{% url 'review:comment_add' %}">
-                                {% csrf_token %}
-
-                                <input type="hidden" name="review" value="{{ review.id }}">
-
-                                {{ comment_form.content }}
-                                <button type="submit">게시</button>
-                            </form>
-                        </div>
-                    </div>
-                </aside>
             </div>
         </div>
-    </section>
-    <!-- Footer-->
-    <footer class="py-5 bg-dark">
-        <div class="container px-5">
-            <p class="m-0 text-center text-white">Copyright &copy; OMOA 2025</p>
-        </div>
-    </footer>
-    <!-- Bootstrap core JS-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Core theme JS-->
-    <script src="js/scripts.js"></script>
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <!-- * *                               SB Forms JS                               * *-->
-    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
-    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
-    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-</body>
-
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/reviewscripts.js"></script>
+    </body>
 </html>

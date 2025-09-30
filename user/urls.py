@@ -10,4 +10,7 @@ urlpatterns = [
     path("<int:user_id>/following/", views.following, name = "following"),
     path("<int:user_id>/follow/",views.follow, name="follow"),
     path("my_page/<int:id>/", views.my_page, name = "mypage"),
+    path("my_page/<int:id>/mylike/", views.my_likelist, name= "mylike"),
+    path("my_page/<int:id>/myreview/", views.my_reviewlist, name= "myreview"),
+    path("my_page/<int:id>/myfollow/", views.my_followlist, name= "myfollow"),
     ]

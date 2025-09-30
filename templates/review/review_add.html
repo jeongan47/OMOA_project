@@ -13,6 +13,14 @@
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles3.css' %}" rel="stylesheet" />
 
+<style>
+    .background {
+        background-image: url("{{ post.post_image }}"); 
+        background-size: contain; 
+        background-repeat: no-repeat; 
+        background-position: center; 
+}
+</style>
 </head>
 
 <body>
@@ -41,6 +49,18 @@
                 </div>
             </div>
         </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5 background">
+                <div class="container px-4 px-lg-5 my-5">
+                    <div class="display-4 fw-bolder">
+                        <a href="{% url 'post:post_detail' post.id %}" class="display-5 fw-bolder text-white mb-2">
+                            {{ post.content_name }}
+                        </a>
+                        <p class="lead fw-normal text-white-50 mb-0">다양한 작품에 대해 의견을 남겨보세요 !</p>
+                    </div>
+                </div>
+            </div>
+        </header>
      <div id="review-add">
         <h1>Review 작성</h1>
         <h2>{{ post.content_name }} Review</h2>
