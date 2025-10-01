@@ -10,30 +10,32 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Netflix' %}">Netflix</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Amazon' %}">Amazon</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
-                              </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                      <a href="{% url 'user:logout' %}">Logout</a>
-                    </form>
-                </div>
-            </div>
-        </nav>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'post:ott_view' ott='all' %}">OMOA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Netflix' %}">Netflix</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Amazon' %}">Amazon</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
+                        </ul>
+                <li class="nav-item"><a class="nav-link"href="{% url 'review:review_list' %}">Review</a></li>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a href="{% url 'user:logout' %}">Logout</a>
+            </form>
+        </div>
+    </div>
+</nav>
     <main class="flex-shrink-0">
         <!-- Header-->
         <header class="bg-dark py-5">
@@ -41,7 +43,11 @@
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <p class="text-body-secondary text-white-50">
+<<<<<<< HEAD
+                            찜 목록
+=======
                             찜한 컨텐츠
+>>>>>>> 775aac8bad3e9cda9de58f36fef31bc805912991
                             <a href="{% url 'user:mylike' pageuser.id %}" class="text-reset text-white-50">{{ pageuser.like_posts.count }}</a>개
                         </p>
                         <p class="text-body-secondary text-white-50">
@@ -89,7 +95,13 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<<<<<<< HEAD
+                    <h2 class="fw-bolder mb-0">
+                        찜 목록 {{ pageuser.like_posts.all.count }}개
+                    </h2>
+=======
                     <h2 class="fw-bolder mb-0">{{ pageuser.username }}의 찜한 컨텐츠, 총 {{ pageuser.like_posts.all.count }}개</h2>
+>>>>>>> 775aac8bad3e9cda9de58f36fef31bc805912991
                     {% if pageuser.like_posts.count >= 5 %}
                     {% for post in pageuser.like_posts.all|slice:":5" %}
                     <div class="col mb-5">
@@ -140,7 +152,11 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<<<<<<< HEAD
+                    <h2 class="fw-bolder mb-0">리뷰 {{ pageuser.review_set.count }}건</h2>
+=======
                     <h2 class="fw-bolder mb-0">{{ pageuser.username }}님의 리뷰, 총 {{ pageuser.review_set.count }}건</h2>
+>>>>>>> 775aac8bad3e9cda9de58f36fef31bc805912991
                     {% if pageuser.review_set.count >= 5 %}
                     {% for post in pageuser.like_posts.all|slice:":5" %}
                         <div class="col mb-5">
@@ -195,9 +211,28 @@
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+<<<<<<< HEAD
+                <h2 class="fw-bolder">팔로잉 {{ pageuser.following.count }}명</h2>
+                    {% if pageuser.following.count >= 5 %}
+                    {% for f in pageuser.following.all|slice:":5" %}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="{{ f.profile_image.url }}" />
+                                    <h5 class="card-title mb-3 text-center">{{ f.username }}</h5>
+                                <p class="card-text mb-0 text-center">{{ f.short_description }}</p>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'user:mypage' id=f.id %}">click</a></div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}    
+                    {% for f in pageuser.following.all %}
+=======
                 <h2 class="fw-bolder">{{ pageuser.username }}의 팔로우 목록, 총 {{ pageuser.following.count }}명</h2>
                     {% if pageuser.following.count >= 5 %}
                     {% for f in pageuser.following.all|slice:":5" %}
+>>>>>>> 775aac8bad3e9cda9de58f36fef31bc805912991
                     <div class="col mb-5">
                         <div class="card h-100">
                             <img class="card-img-top" src="{{ f.profile_image.url }}" width="350" />
@@ -209,6 +244,8 @@
                         </div>
                     </div>
                     {% endfor %}
+<<<<<<< HEAD
+=======
                     {% else %}    
                     {% for f in pageuser.following.all %}
                     <div class="col mb-5">
@@ -222,6 +259,7 @@
                         </div>
                     </div>
                     {% endfor %}
+>>>>>>> 775aac8bad3e9cda9de58f36fef31bc805912991
                     {% endif %}
                 </div>
             </div>

@@ -6,12 +6,6 @@ from django.urls import reverse
 from tablib import Dataset
 from .xlimport import PostResource
 # Create your views here.
-    
-def ott_choice(request):
-    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버려
-        return redirect("user:login")
-
-    return render(request,"post/ott_choice.html")
 
 def ott_view(request, ott):
     if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
@@ -22,13 +16,19 @@ def ott_view(request, ott):
     query = request.GET.get("q")
     print("query:", query)
 
-    if query:
-        search = Post.objects.filter(content_name__contains = query, content_ott__contains=ott)
+    if ott == "all":
+        search = Post.objects.all()
+        if query:
+            search = Post.objects.filter(content_name__contains = query)
     else:
-        search = Post.objects.filter(content_ott__contains=ott)
-    
+        if query:
+            search = Post.objects.filter(content_name__contains = query, content_ott__contains=ott)
+        else:
+            search = Post.objects.filter(content_ott__contains=ott)
+
     context = {
-        "posts": search
+        "posts": search,
+        "ott":ott,
     }
 
     return render(request,"post/post_list.html", context)
