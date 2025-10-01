@@ -39,19 +39,6 @@ def post_detail(request, id):
     
     post = Post.objects.get(id = id)
 
-    # content_dir_list = eval(post.content_dir)
-    # post.content_dir = []
-
-    # for i in content_dir_list:
-    #     post.content_dir.append(i.strip(',').strip())
-    
-    # content_genre_list = eval(post.content_genre)
-    # post.content_genre = []
-
-    # for i in content_genre_list:
-    #     post.content_genre.append(i.strip())
-
-    # post.content_ott = eval(post.content_ott)
     review_form = ReviewForm()
     
     context = {

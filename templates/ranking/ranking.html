@@ -18,7 +18,9 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                    {% if user.id %}
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
+                    {% endif %}
                     <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
@@ -30,9 +32,15 @@
                             </ul>
                     </li>
                 </ul>
+                {% if user.id %}
                 <form class="d-flex">
                     <a href="{% url 'user:logout' %}">Logout</a>
                 </form>
+                {% else %}
+                <form class="d-flex">
+                    <a href="{% url 'user:login' %}">Sign In</a>
+                </form>
+                {% endif %}
             </div>
         </div>
     </nav>

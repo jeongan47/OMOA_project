@@ -37,6 +37,18 @@ def review_add(request, post_id):
 
     return render(request, 'review/review_add.html',context)
 
+@require_POST
+def review_delete(request, review_id):
+    review = Review.objects.get(pk=review_id)
+    print("리뷰삭제 실행, 대상 영화의 id: ",review.post.id)
+    if review.user == request.user:
+        review.delete()
+        # return redirect("post:post_detail", review.post.id) 
+        return redirect("review:review_list")
+    
+    else:
+        return HttpResponseForbidden("이 리뷰를 삭제할 권한이 없습니다")
+
 def review_detail(request,review_id):
     comment_form = CommentForm()
     

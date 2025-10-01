@@ -56,15 +56,15 @@
                         <div class="col-md-9">
                             <!-- <div class="small mb-1">SKU: BST-498</div> -->
                             <h1 class="display-5 fw-bolder">{{ post.content_name }}
-                                <form action="{% url 'post:post_detail_like' post_id=post.id %}" method="POST">
+                                <form action="{% url 'post:post_detail_like' post_id=post.id %}" method="POST" style="display:inline">
                                     {% csrf_token %}
                                     {% if user in post.like_user.all %}
                                     <button type="submit" style="border: none; background-color: transparent" >
-                                        <img width="48" height="48" src="https://img.icons8.com/color/48/like--v1.png" alt="like--v1"/>
+                                        ❤️
                                     </button>
                                     {% else %}
                                     <button type="submit" style="border: none; background-color: transparent" >
-                                        <img width="50" height="50" src="https://img.icons8.com/ios-filled/50/like--v1.png" alt="like--v1"/>
+                                        🤍
                                     </button>
                                     {% endif %}
                                 </form>

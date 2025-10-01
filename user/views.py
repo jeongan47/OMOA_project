@@ -116,15 +116,29 @@ def follow(request, user_id):
     return redirect(url_next)
 
 def my_page(request, id):
-    user = User.objects.get(id = id)
-    context = {"user": user}
+    pageuser = User.objects.get(id = id)
+    context = {"pageuser": pageuser}
 
     return render(request, "user/profile.html", context)
 
+def user_follow(request, id):
+    print("follow start!")
+    follow_user = User.objects.get(id = id)
+    user = request.user
+
+    # 유저가 찜한 목록에 이미 있다면 목록에서 지우고 없다면 목록에 추가
+    # user.like_posts.remove(post) if user.like_posts.filter(id = post.id).exists() else user.like_posts.add(post)
+    user.following.remove(follow_user) if follow_user in user.following.all() else user.following.add(follow_user)
+
+    return redirect("user:mypage", id=id)
+
 def my_likelist(request, id):
     user = User.objects.get(id = id)
-
-    context = {"user": user}
+    me = request.user
+    context = {
+        "user": user,
+        "me": me,
+        }
 
     return render(request, "user/mylike.html", context)
 
