@@ -14,6 +14,7 @@ class CommentForm(forms.ModelForm):
                     "placeholder": "댓글 달기...",
                     "class":"form-control",
                     "rows":"3",
+                    "style": "resize: none; width:90%; margin-right: 15px;",
                 }
             )
         }
@@ -28,7 +29,7 @@ class ReviewForm(forms.ModelForm):
         widgets = {
             "title": forms.TextInput(
                 attrs= {
-                    "class":"form-control", "aria-describedby": "inputGroup-sizing-default", "style":"width:80%"
+                    "placeholder":"제목을 입력해주세요", "class":"form-control", "aria-describedby": "inputGroup-sizing-default", "style":"width:80%"
                 }
             ),
             "content": forms.Textarea(

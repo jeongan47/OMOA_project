@@ -75,54 +75,52 @@
                             <div class="text-muted fst-italic mb-2">{{ review.created }}</div>
                             <!-- Post categories-->
                             <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'user:mypage' review.user.id %}">{{ review.user.username}} </a>
-                            <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'post:post_detail' review.post_id %}">{{review.post.content_name }}</a>
+                            <a class="badge bg-secondary text-decoration-none link-light" href="{% url 'post:post_detail' review.post_id %}">{{review.post.content_name }}</a><!-- 리뷰 삭제 Form 추가 -->
+                        {% if user == review.user %}
+                        <form method="POST" action="{% url 'review:review_delete' review.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-outline-danger" style="float: right;">삭제</button>
+                        </form>
+                        {% endif %}
                         </header>
                         <!-- Post content-->
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ review.content|linebreaks }}
                         </section>
-                        <!-- 리뷰 삭제 Form 추가 -->
-                        {% if user == review.user %}
-                        <form method="POST" action="{% url 'review:review_delete' review.id %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-primary">삭제</button>
-                        </form>
-                        {% endif %}
+                        
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
-                                 <div class="post-comment-create">
-                                    <form method="POST" action="{% url 'review:comment_add' %}">
-                                    {% csrf_token %}
+                                <div class="post-comment-create">
+                                    <form method="POST" action="{% url 'review:comment_add' %}" style="display: flex;">
+                                        {% csrf_token %}
                                         <input type="hidden" name="review" value="{{ review.id }}">
                                         {{ comment_form.content }}
-                                        <button type="submit">작성</button>
+                                        <button class="btn btn-primary" type="submit" style="display: inline; margin-top: 20px; margin-bottom: 20px; width:100px;">작성</button>
                                     </form>
                                 </div>
                                 {% for comment in review.comment_set.all %}
-                                <div class="d-flex">
+                                <div class="d-flex" style="margin-top: 10px;">
                                     <a href="{% url 'user:mypage' comment.user.id %}"></a>
                                     <div class="flex-shrink-0"><img class="rounded-circle" src="{{ comment.user.profile_image.url }}" width="45",height="30" /></div>
-                                    <div class="ms-3">
+                                    <div class="ms-3 w-100">
                                         <a href="{% url 'user:mypage' comment.user.id %}">
                                         <div class="fw-bold">{{ comment.user.username }}</div>
                                         </a>
                                         {{ comment.content|linebreaks }}
-                                        {{ comment.created }}
+                                        {{ comment.created }}{% if user == comment.user %}
+                                        <form method="POST" action="{% url 'review:comment_delete' comment.id %}" class="text-end">
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-outline-danger">
+                                                삭제
+                                            </button>
+                                        </form>
+                                        {% endif %}
                                     </div>
                                 </div>
-                                    <!-- 댓글 삭제 Form 추가 -->
-                                    {% if user == comment.user %}
-                                    <form method="POST" action="{% url 'review:comment_delete' comment.id %}">
-                                        {% csrf_token %}
-                                        <button type="submit" >
-                                            <button type="button" class="btn btn-outline-danger">삭제</button>
-                                        </button>
-                                    </form>
-                                    {% endif %}
                                 {% endfor%}
                             </div>
                         </div>
@@ -131,7 +129,7 @@
             </div>
         </div>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
+        <footer class="bg-dark">
             <div class="container"><p class="m-0 text-center text-white">Copyright &copy; OMOA</p></div>
         </footer>
         <!-- Bootstrap core JS-->
