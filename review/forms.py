@@ -26,9 +26,14 @@ class ReviewForm(forms.ModelForm):
             "content",
         ]
         widgets = {
+            "title": forms.TextInput(
+                attrs= {
+                    "class":"form-control", "aria-describedby": "inputGroup-sizing-default", "style":"width:80%"
+                }
+            ),
             "content": forms.Textarea(
                 attrs = {
-                    "placeholder":"내용을 입력해주세요",
+                    "placeholder":"내용을 입력해주세요", "class":"form-control"
                 }
             )
         }

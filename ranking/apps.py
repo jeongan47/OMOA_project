@@ -62,11 +62,15 @@ class RankingConfig(AppConfig):
                 print("crawling Ends!!!!!!!!!")
 
 def crawler(link, platform, mt):
-# !!!!!! pip install beautifulsoup4
-# !!!!!! pip install lxml 반드시 할 것
-# !!!!!! pip install selenium 반드시 할 것
-    import time
-    from selenium import webdriver
+    # pip install tablib
+    # pip install django-import-export
+    # pip install charset-normalizer
+    # pip install Pillow
+    # pip install lxml
+    # pip install beautifulsoup4
+    # pip install numpy
+    # pip install pandas
+    import requests
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
     from ranking.models import Netflix_movieRank, Netflix_tvRank, Amazon_movieRank, Amazon_tvRank, Disney_Rank, Wavve_movieRank, Wavve_tvRank
@@ -133,34 +137,26 @@ def crawler(link, platform, mt):
 
     elif "wavve" in platform: # 웨이브일 경우
 
-        options = webdriver.ChromeOptions()
-        options.add_argument("--headless")
-
-        driver = webdriver.Chrome()
-
-        driver.get(link)
-
-        time.sleep(5)
-
-        soup = bs(driver.page_source, "lxml")
-        
-        m_list = soup.select("div.ranking-band div.swiper-wrapper > div")
-
         if "movie" in mt: # 영화일 경우
+            res = requests.get("https://apis.wavve.com/v1/catalog?category=movie&genre=svod&catalogType=ranking&rankingType=top&uitype=band_98&uiparent=GN59-MN503&uicode=MN503&uirank=3&limit=20&offset=0&mtype=svod&orderby=viewtime&broadcastid=MN503&isBand=true&apikey=E5F3E0D30947AA5440556471321BB6D9&client_version=7.1.40&device=pc&drm=wm&partner=pooq&pooqzone=none&region=kor&targetage=all")
+
+            data = res.json()
             num = 1
-            for m in m_list[0:10]:
+            for i in data["data"]["context_list"][0:10]:
                 Wavve_movieRank.objects.create(content_rank = num,
-                                            content_name = m.div.a.select("div")[1].div.picture.img["alt"],
-                                            content_img = m.div.a.select("div")[1].div.picture.img["src"])
+                                              content_name = i["program"]["title"],
+                                              content_img = i["program"]["vertical_logo_y_image"])
+                
                 num += 1
-            driver.quit()
 
         elif "tv" in mt: # tv프로그램일 경우
+            res = requests.get("https://apis.wavve.com/v1/catalog?category=vod&genre=drama&catalogType=ranking&rankingType=realtime&uitype=band_98&uiparent=GN56-VN561&uicode=VN561&uirank=1&limit=20&offset=0&orderby=viewtime&broadcastid=VN561&isBand=true&apikey=E5F3E0D30947AA5440556471321BB6D9&client_version=7.1.40&device=pc&drm=wm&partner=pooq&pooqzone=none&region=kor&targetage=all")
+
+            data = res.json()
             num = 1
-            for m in m_list[0:10]:
+            for i in data["data"]["context_list"][0:10]:
                 Wavve_tvRank.objects.create(content_rank = num,
-                                            content_name = m.div.a.select("div")[1].div.picture.img["alt"],
-                                            content_img = m.div.a.select("div")[1].div.picture.img["src"])
+                                              content_name = i["program"]["title"],
+                                              content_img = i["program"]["vertical_logo_y_image"])
                 num += 1
-            driver.quit()
         

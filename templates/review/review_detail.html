@@ -18,6 +18,9 @@
         background-position: center; 
 }
 </style>
+<script>
+    const netflixtext = ", Netflix Standard with Ads"
+</script>
     </head>
     <body>
         <!-- Responsive navbar-->
@@ -75,7 +78,7 @@
                         </header>
                         <!-- Post content-->
                         <section class="mb-5">
-                            <p class="fs-5 mb-4">{{ review.content }}
+                            <p class="fs-5 mb-4">{{ review.content|linebreaks }}
                         </section>
                         <!-- 리뷰 삭제 Form 추가 -->
                         {% if user == review.user %}
@@ -104,7 +107,7 @@
                                         <a href="{% url 'user:mypage' comment.user.id %}">
                                         <div class="fw-bold">{{ comment.user.username }}</div>
                                         </a>
-                                        {{ comment.content }}
+                                        {{ comment.content|linebreaks }}
                                     </div>
                                 </div>
                                     <!-- 댓글 삭제 Form 추가 -->
