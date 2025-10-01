@@ -116,6 +116,12 @@ def follow(request, user_id):
     return redirect(url_next)
 
 def my_page(request, id):
+
+    print("mypage불러오기")
+    if not request.user.is_authenticated: # 유저의 접근이 올바르지 않다면 로그인 화면으로 보내버리기
+        return redirect("user:login")
+    
+
     pageuser = User.objects.get(id = id)
     context = {"pageuser": pageuser}
 
