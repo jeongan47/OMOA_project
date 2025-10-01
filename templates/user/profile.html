@@ -43,7 +43,7 @@
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <p class="text-body-secondary text-white-50">
-                            찜한 컨텐츠
+                            찜 목록
                             <a href="{% url 'user:mylike' pageuser.id %}" class="text-reset text-white-50">{{ pageuser.like_posts.count }}</a>개
                         </p>
                         <p class="text-body-secondary text-white-50">
@@ -180,6 +180,7 @@
                                     <h5 class="fw-bolder">{{ review.post.content_name }}</h5>
                                     <!-- Product price-->
                                     <span class="text-muted">{{ review.title }}</span>
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'review:review_detail' review.id %}">click</a></div>
                                 </div>
                             </div>
                             </div>

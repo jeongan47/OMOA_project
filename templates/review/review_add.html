@@ -50,32 +50,32 @@
         </div>
     </div>
 </nav>
-        <!-- Header-->
-        <header class="bg-dark py-5 background">
-                <div class="container px-4 px-lg-5 my-5">
-                    <div class="display-4 fw-bolder">
-                        <a href="{% url 'post:post_detail' post.id %}" class="display-5 fw-bolder text-white mb-2">
-                            {{ post.content_name }}
-                        </a>
-                        <p class="lead fw-normal text-white-50 mb-0">다양한 작품에 대해 의견을 남겨보세요 !</p>
-                    </div>
-                </div>
+<!-- Header-->
+<header class="bg-dark py-5 background">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="display-4 fw-bolder">
+                <a href="{% url 'post:post_detail' post.id %}" class="display-5 fw-bolder text-white mb-2">
+                    {{ post.content_name }}
+                </a>
+                <p class="lead fw-normal text-white-50 mb-0">다양한 작품에 대해 의견을 남겨보세요 !</p>
             </div>
         </div>
+    </div>
+</div>
+</div>
+</header>
+<div style="display: flex; justify-content: center; margin-top: 5%; margin-bottom: 5%;">
+    <div class="card" style="width: 80%; height: 90%;">
+        <div class="card-body">
+            <h2 class="card-title" style="font-family: 'sans-serif';">리뷰 작성</h2>
+            <form method="POST" action="{% url 'review:review_add' post.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="post" value="{{ post.id }}">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-dark">Upload!</button>
+            </form>
         </div>
-    </header>
-    <div style="display: flex; justify-content: center; margin-top: 5%; margin-bottom: 5%;">
-        <div class="card" style="width: 80%; height: 90%;">
-            <div class="card-body">
-                <h2 class="card-title" style="font-family: 'sans-serif';">Write {{ post.content_name }} Review</h2>
-                <form method="POST" action="{% url 'review:review_add' post.id %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="post" value="{{ post.id }}">
-                    {{ form.as_p }}
-                    <button type="submit" class="btn btn-dark">Upload!</button>
-                </form>
-            </div>
-        </div>
+    </div>
     </div>
     <!-- Footer-->
     <footer class="py-5 bg-dark">
