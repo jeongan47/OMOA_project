@@ -11,12 +11,18 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles3.css' %}" rel="stylesheet" />
+
+<style>
+.radius_img_2 {
+    border-radius: 20%;
+}
+</style>
 </head>
 
 <body>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
+                <a class="navbar-brand" href="{% url 'post:ott_view' ott='all' %}">OMOA</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -30,6 +36,7 @@
                                   <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
                                   <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
                               </ul>
+                        <li class="nav-item"><a class="nav-link"href="{% url 'review:review_list' %}">Review</a></li>
                         </li>
                     </ul>
                     <form class="d-flex" role="search" method="GET">
@@ -42,6 +49,18 @@
     <header class="bg-dark py-5">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
+                <div class="d-flex justify-content-around">
+                    {% if ott == 'Netflix' %}
+                        <img src="https://images.justwatch.com/icon/207360008/s100/netflix.avif" class="radius_img_2">
+                    {% elif ott == 'Amazon' %}
+                        <img src="https://images.justwatch.com/icon/322992749/s100/amazonprimevideo.avif" class="radius_img_2">
+                    {% elif ott == 'Disney' %}
+                        <img src="https://images.justwatch.com/icon/313118777/s100/disneyplus.avif" class="radius_img_2">
+                    {% elif ott == 'wavve' %}
+                        <img src="https://images.justwatch.com/icon/155655742/s100/wavve.avif" class="radius_img_2">
+                    {% endif %}
+
+                </div>
                 <h1 class="display-4 fw-bolder">OMOA</h1>
                 <p class="lead fw-normal text-white-50 mb-0">OTT의 모든 것을 담다</p>
             </div>

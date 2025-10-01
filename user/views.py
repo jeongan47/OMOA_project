@@ -10,7 +10,7 @@ from django.urls import reverse
 def login_view(request):
     # 이미 로그인되어 있다면
     if request.user.is_authenticated:
-        return redirect("post:choice")
+        return redirect('post:ott_view', "all")
     
     if request.method == "POST":
         # LoginForm 객체를 만들며, 입력 데이터는 request.POST 를 사용
@@ -29,7 +29,7 @@ def login_view(request):
             if user:
                 # 로그인 처리 후, 피드 페이지로 redirect
                 login(request, user)
-                return redirect("post:choice")
+                return redirect('post:ott_view', "all")
             
             else:
                 # 사용자가 없다면 form에 에러 추가
@@ -60,7 +60,7 @@ def signup(request):
             # Form에 에러가 없다면 form의 save() 메서드로 사용자를 생성
             user = form.save()
             login(request, user)
-            return redirect("post:choice")
+            return redirect('post:ott_view', "all")
 
     else: # GET 요청에서는 빈 form 을 보여줌
         # SignupForm 인스턴스를 생성, Template에 전달
@@ -116,15 +116,29 @@ def follow(request, user_id):
     return redirect(url_next)
 
 def my_page(request, id):
-    user = User.objects.get(id = id)
-    context = {"user": user}
+    pageuser = User.objects.get(id = id)
+    context = {"pageuser": pageuser}
 
     return render(request, "user/profile.html", context)
 
+def user_follow(request, id):
+    print("follow start!")
+    follow_user = User.objects.get(id = id)
+    user = request.user
+
+    # 유저가 찜한 목록에 이미 있다면 목록에서 지우고 없다면 목록에 추가
+    # user.like_posts.remove(post) if user.like_posts.filter(id = post.id).exists() else user.like_posts.add(post)
+    user.following.remove(follow_user) if follow_user in user.following.all() else user.following.add(follow_user)
+
+    return redirect("user:mypage", id=id)
+
 def my_likelist(request, id):
     user = User.objects.get(id = id)
-
-    context = {"user": user}
+    me = request.user
+    context = {
+        "user": user,
+        "me": me,
+        }
 
     return render(request, "user/mylike.html", context)
 

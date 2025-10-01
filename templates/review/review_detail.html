@@ -20,31 +20,32 @@
 </style>
     </head>
     <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="{% url 'review:review_list' %}">OMOA-Review</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
-                              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Netflix' %}">Netflix</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Amazon' %}">Amazon</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
-                                  <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
-                              </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                      <a href="{% url 'user:logout' %}">Logout</a>
-                    </form>
-                </div>
-            </div>
-        </nav>
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container px-4 px-lg-5">
+        <a class="navbar-brand" href="{% url 'post:ott_view' ott='all' %}">OMOA</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{% url 'user:mypage' user.id %}">My Page</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'ranking:ranking' %}">Ranking</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">OTT</a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Netflix' %}">Netflix</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Amazon' %}">Amazon</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='Disney' %}">Disney</a></li>
+                            <li><a class="dropdown-item" href="{% url 'post:ott_view' ott='wavve' %}">wavve</a></li>
+                        </ul>
+                <li class="nav-item"><a class="nav-link"href="{% url 'review:review_list' %}">Review</a></li>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a href="{% url 'user:logout' %}">Logout</a>
+            </form>
+        </div>
+    </div>
+</nav>
             <!-- Header-->
         <header class="bg-dark py-5 background">
                 <div class="container px-4 px-lg-5 my-5">
@@ -77,18 +78,27 @@
                         <section class="mb-5">
                             <p class="fs-5 mb-4">{{ review.content }}
                         </section>
+                        <!-- 리뷰 삭제 Form 추가 -->
+                        {% if user == review.user %}
+                        <form method="POST" action="{% url 'review:review_delete' review.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">삭제</button>
+                        </form>
+                        {% endif %}
                     </article>
                     <!-- Comments section-->
                     <section class="mb-5">
                         <div class="card bg-light">
                             <div class="card-body">
                                 <!-- Comment form-->
+                                 <div class="post-comment-create">
                                     <form method="POST" action="{% url 'review:comment_add' %}">
                                     {% csrf_token %}
-                                    {{ comment_form.content }}
                                         <input type="hidden" name="review" value="{{ review.id }}">
-                                        <button type="submit" class="btn btn-primary">작성</button>
+                                        {{ comment_form.content }}
+                                        <button type="submit">작성</button>
                                     </form>
+                                </div>
                                 {% for comment in review.comment_set.all %}
                                 <div class="d-flex">
                                     <a href="{% url 'user:mypage' comment.user.id %}"></a>
@@ -98,13 +108,16 @@
                                         <div class="fw-bold">{{ comment.user.username }}</div>
                                         </a>
                                         {{ comment.content }}
+                                        {{ comment.created }}
                                     </div>
                                 </div>
                                     <!-- 댓글 삭제 Form 추가 -->
                                     {% if user == comment.user %}
                                     <form method="POST" action="{% url 'review:comment_delete' comment.id %}">
                                         {% csrf_token %}
-                                        <button type="submit" class="btn btn-primary">삭제</button>
+                                        <button type="submit" >
+                                            <button type="button" class="btn btn-outline-danger">삭제</button>
+                                        </button>
                                     </form>
                                     {% endif %}
                                 {% endfor%}
